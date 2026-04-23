@@ -272,7 +272,7 @@ export default function AdminElearningTableClient({ items }) {
                   <td className="px-4 py-3 text-right">
                     <div className="flex items-center justify-end gap-1.5">
                       <Link
-                        href={`/e-learning/${item.slug}`}
+                        href={`/formations/${item.slug}`}
                         target="_blank"
                         className="text-xs font-medium bg-slate-800 text-slate-300 px-2.5 py-1.5 rounded-lg hover:bg-slate-700 transition-colors flex items-center gap-1"
                         title="Visualiser"

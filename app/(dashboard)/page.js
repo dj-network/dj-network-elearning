@@ -154,7 +154,7 @@ export default async function DashboardPage() {
             {items.map((formation) => (
               <Link
                 key={formation.id}
-                href={`/bibliotheque/e-learning/${formation.slug}`}
+                href={`/formations/${formation.slug}`}
                 className="group overflow-hidden rounded-3xl border border-slate-800 bg-[#162a31] hover:border-primary/60 hover:-translate-y-1 transition-all"
               >
                 <div className="relative aspect-video bg-[#0f1e23] overflow-hidden">

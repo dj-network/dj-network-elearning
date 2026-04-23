@@ -148,11 +148,7 @@ export default async function AdminElearningDetailPage({ params }) {
               {allLessons.length} leçon(s)
             </span>
             <Link
-              href={
-                sortedCourses.length > 0
-                  ? `/bibliotheque/e-learning/${mc.slug}`
-                  : `/bibliotheque/masterclass/${mc.slug}`
-              }
+              href={`/formations/${mc.slug}`}
               target="_blank"
               className="bg-slate-800 text-slate-300 px-3 py-1 rounded-lg font-bold hover:bg-slate-700 transition-colors flex items-center gap-1"
             >
