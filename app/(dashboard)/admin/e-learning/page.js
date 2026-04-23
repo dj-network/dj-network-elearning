@@ -5,15 +5,15 @@ import AdminElearningHeaderActions from "./AdminElearningHeaderActions";
 import AdminElearningTableClient from "./AdminElearningTableClient";
 
 export default async function AdminElearningPage() {
-  let allMasterclasses = [];
+  let allFormations = [];
   try {
-    allMasterclasses = await db
+    allFormations = await db
       .select()
       .from(elearnings)
       .orderBy(asc(elearnings.sortOrder), desc(elearnings.createdAt));
   } catch {
     // Backward-compat if DB not migrated to include new columns (e.g. elearnings.badges).
-    allMasterclasses = await db
+    allFormations = await db
       .select({
         id: elearnings.id,
         title: elearnings.title,
@@ -24,10 +24,6 @@ export default async function AdminElearningPage() {
         duration: elearnings.duration,
         level: elearnings.level,
         category: elearnings.category,
-        price: elearnings.price,
-        isPremium: elearnings.isPremium,
-        isFeatured: elearnings.isFeatured,
-        stripeProductId: elearnings.stripeProductId,
         videoUrl: elearnings.videoUrl,
         createdAt: elearnings.createdAt,
       })
@@ -40,7 +36,7 @@ export default async function AdminElearningPage() {
     .select({ id: lessons.id, courseId: lessons.courseId })
     .from(lessons);
 
-  const elearningStats = allMasterclasses.map((mc) => {
+  const elearningStats = allFormations.map((mc) => {
     const mcCourses = allCourses.filter((c) => c.elearningId === mc.id);
     const courseIds = mcCourses.map((c) => c.id);
     const mcLessons = allLessons.filter((l) => courseIds.includes(l.courseId));

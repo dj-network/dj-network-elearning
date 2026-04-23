@@ -46,15 +46,12 @@ export default function AdminElearningMetadataEditor({ mc }) {
     setSaving(true);
     const fd = new FormData(e.target);
     const data = Object.fromEntries(fd.entries());
-    data.price = data.price ? parseFloat(data.price) : null;
-    data.accessModel = data.accessModel || "purchase_only";
-    data.accessTier = data.accessTier || "none";
-    data.memberDiscountStudio = data.memberDiscountStudio
-      ? parseFloat(data.memberDiscountStudio)
-      : null;
-    data.memberDiscountStudioPlus = data.memberDiscountStudioPlus
-      ? parseFloat(data.memberDiscountStudioPlus)
-      : null;
+    data.price = mc.price ?? null;
+    data.accessModel = "assigned";
+    data.accessTier = "none";
+    data.memberDiscountStudio = null;
+    data.memberDiscountStudioPlus = null;
+    data.stripeProductId = null;
 
     const tagsArr = parseTagsText(String(data.tags || ""));
     data.tags = tagsArr.length ? JSON.stringify(tagsArr) : null;
@@ -169,19 +166,6 @@ export default function AdminElearningMetadataEditor({ mc }) {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                    Prix (€)
-                  </label>
-                  <input
-                    name="price"
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    defaultValue={mc.price ?? ""}
-                    className="w-full bg-[#0f1e23] border border-slate-700/50 rounded-xl px-4 py-2.5 text-white outline-none focus:border-primary transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
                     Durée totale
                   </label>
                   <input
@@ -206,74 +190,6 @@ export default function AdminElearningMetadataEditor({ mc }) {
                     <option value="Expert">Expert</option>
                   </select>
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                    Stripe Product ID
-                  </label>
-                  <input
-                    name="stripeProductId"
-                    defaultValue={mc.stripeProductId ?? ""}
-                    className="w-full bg-[#0f1e23] border border-slate-700/50 rounded-xl px-4 py-2.5 text-white font-mono text-sm outline-none focus:border-primary transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                    Modèle d&apos;accès
-                  </label>
-                  <select
-                    name="accessModel"
-                    defaultValue={mc.accessModel ?? "purchase_only"}
-                    className="w-full bg-[#0f1e23] border border-slate-700/50 rounded-xl px-4 py-2.5 text-white outline-none focus:border-primary transition-colors"
-                  >
-                    <option value="purchase_only">Achat uniquement</option>
-                    <option value="subscription">Inclus abonnement</option>
-                    <option value="free">Gratuit</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                    Formule requise
-                  </label>
-                  <select
-                    name="accessTier"
-                    defaultValue={mc.accessTier ?? "none"}
-                    className="w-full bg-[#0f1e23] border border-slate-700/50 rounded-xl px-4 py-2.5 text-white outline-none focus:border-primary transition-colors"
-                  >
-                    <option value="none">Aucune</option>
-                    <option value="free">Free</option>
-                    <option value="studio">Studio</option>
-                    <option value="studio_plus">Studio+</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                    Remise Studio (%)
-                  </label>
-                  <input
-                    name="memberDiscountStudio"
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="1"
-                    defaultValue={mc.memberDiscountStudio ?? ""}
-                    className="w-full bg-[#0f1e23] border border-slate-700/50 rounded-xl px-4 py-2.5 text-white outline-none focus:border-primary transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                    Remise Studio+ (%)
-                  </label>
-                  <input
-                    name="memberDiscountStudioPlus"
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="1"
-                    defaultValue={mc.memberDiscountStudioPlus ?? ""}
-                    className="w-full bg-[#0f1e23] border border-slate-700/50 rounded-xl px-4 py-2.5 text-white outline-none focus:border-primary transition-colors"
-                  />
-                </div>
-
                 <div className="col-span-2">
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
                     Image de couverture

@@ -169,14 +169,6 @@ export default function AdminElearningTableClient({ items }) {
                     Contenu
                   </span>
                 </th>
-                <th
-                  className="px-4 py-3 cursor-pointer select-none"
-                  onClick={() => handleSort("price")}
-                >
-                  <span className="flex items-center gap-1 text-slate-400 font-bold text-xs uppercase tracking-wider">
-                    Prix {renderSortIcon("price")}
-                  </span>
-                </th>
                 <th className="px-4 py-3 text-right">
                   <span className="text-slate-400 font-bold text-xs uppercase tracking-wider">
                     Actions
@@ -260,15 +252,6 @@ export default function AdminElearningTableClient({ items }) {
                       {item.courseCount || 0} module(s) • {item.lessonCount || 0} leçon(s)
                     </span>
                   </td>
-                  <td className="px-4 py-3">
-                    {item.price != null ? (
-                      <span className="text-white font-bold text-sm">
-                        {item.price.toFixed(2).replace(".", ",")}€
-                      </span>
-                    ) : (
-                      <span className="text-green-400 text-xs font-bold">Gratuit</span>
-                    )}
-                  </td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex items-center justify-end gap-1.5">
                       <Link
@@ -307,7 +290,7 @@ export default function AdminElearningTableClient({ items }) {
               ))}
               {filteredItems.length === 0 && (
                 <tr>
-                  <td colSpan={8} className="text-center py-12 text-slate-500">
+                  <td colSpan={7} className="text-center py-12 text-slate-500">
                     Aucune formation trouvée.
                   </td>
                 </tr>

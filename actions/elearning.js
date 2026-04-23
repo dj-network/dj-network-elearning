@@ -46,10 +46,10 @@ export async function createElearning(data) {
       category: data.category,
       tags: data.tags || null,
       sortOrder: resolvedSortOrder,
-      price: data.price || null,
-      isPremium: data.isPremium !== undefined ? data.isPremium : !!data.price,
-      stripeProductId: data.stripeProductId,
-      accessModel: data.accessModel ?? "purchase_only",
+      price: null,
+      isPremium: false,
+      stripeProductId: null,
+      accessModel: data.accessModel ?? "assigned",
       accessTier: data.accessTier ?? "none",
       memberDiscountStudio: data.memberDiscountStudio ?? null,
       memberDiscountStudioPlus: data.memberDiscountStudioPlus ?? null,
@@ -143,12 +143,12 @@ export async function updateElearning(id, data) {
       level: data.level,
       category: data.category,
       tags: data.tags,
-      accessModel: data.accessModel ?? "purchase_only",
+      accessModel: data.accessModel ?? "assigned",
       accessTier: data.accessTier ?? "none",
       memberDiscountStudio: data.memberDiscountStudio ?? null,
       memberDiscountStudioPlus: data.memberDiscountStudioPlus ?? null,
       ...(data.sortOrder === undefined ? {} : { sortOrder: data.sortOrder }),
-      stripeProductId: data.stripeProductId,
+      stripeProductId: data.stripeProductId ?? null,
       videoUrl: data.videoUrl,
       imageUrl: data.imageUrl,
     };
@@ -161,7 +161,9 @@ export async function updateElearning(id, data) {
       await db
         .update(elearnings)
         .set({
-          ...baseSet,
+          ...Object.fromEntries(
+            Object.entries(baseSet).filter(([, value]) => value !== undefined),
+          ),
           ...(data.badges === undefined ? {} : { badges: data.badges ?? null }),
           ...(published === undefined ? {} : { isPublished: published }),
         })
@@ -195,7 +197,8 @@ export async function updateElearning(id, data) {
           .set(
             Object.fromEntries(
               Object.entries(baseSet).filter(
-                ([k]) =>
+                ([k, value]) =>
+                  value !== undefined &&
                   ![
                     "sortOrder",
                     "accessModel",
