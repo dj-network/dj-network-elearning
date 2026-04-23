@@ -174,6 +174,7 @@ function UserDetailModal({ user, formations, onClose }) {
 export default function AdminAccessTableClient({ users, formations }) {
   const [query, setQuery] = useState("");
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [addModalOpen, setAddModalOpen] = useState(false);
   const selectedUser = users.find((user) => user.id === selectedUserId);
 
   const filteredUsers = useMemo(() => {
@@ -209,54 +210,95 @@ export default function AdminAccessTableClient({ users, formations }) {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-slate-800 bg-[#162a31] px-5 py-4">
-          <p className="text-xs font-black uppercase tracking-widest text-slate-500">
-            Comptes
-          </p>
-          <p className="text-3xl font-black text-primary">{users.length}</p>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setAddModalOpen(true)}
+            className="rounded-2xl bg-primary px-6 py-3 font-black text-[#0f1e23] hover:bg-primary/90 transition-all flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined">person_add</span>
+            Ajouter un élève
+          </button>
+          <div className="rounded-2xl border border-slate-800 bg-[#162a31] px-5 py-2">
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 leading-tight">
+              Comptes
+            </p>
+            <p className="text-2xl font-black text-primary leading-tight">{users.length}</p>
+          </div>
         </div>
       </div>
 
-      <section className="mb-8 rounded-3xl border border-slate-800 bg-[#162a31] p-6">
-        <h2 className="mb-5 text-2xl font-black">Créer un compte</h2>
-        <form action={createLmsUser} className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-          <input
-            name="name"
-            required
-            placeholder="Nom complet"
-            className="rounded-2xl border border-slate-800 bg-[#0f1e23] px-4 py-3 text-white outline-none focus:border-primary"
-          />
-          <input
-            name="email"
-            type="email"
-            required
-            placeholder="email@exemple.com"
-            className="rounded-2xl border border-slate-800 bg-[#0f1e23] px-4 py-3 text-white outline-none focus:border-primary"
-          />
-          <input
-            name="password"
-            type="password"
-            required
-            placeholder="Mot de passe"
-            className="rounded-2xl border border-slate-800 bg-[#0f1e23] px-4 py-3 text-white outline-none focus:border-primary"
-          />
-          <select
-            name="role"
-            defaultValue="user"
-            className="rounded-2xl border border-slate-800 bg-[#0f1e23] px-4 py-3 text-white outline-none focus:border-primary"
-          >
-            <option value="user">Élève</option>
-            <option value="formateur">Formateur</option>
-            <option value="admin">Admin</option>
-          </select>
-          <button
-            type="submit"
-            className="rounded-2xl bg-primary px-5 py-3 font-black text-[#0f1e23] hover:bg-primary/90 transition-colors"
-          >
-            Créer
-          </button>
-        </form>
-      </section>
+      {addModalOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
+          <div className="w-full max-w-md rounded-3xl border border-slate-700 bg-[#162a31] p-8 shadow-2xl">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-black text-white">Ajouter un élève</h2>
+              <button
+                onClick={() => setAddModalOpen(false)}
+                className="text-slate-500 hover:text-white"
+              >
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <form action={createLmsUser} className="space-y-4">
+              <div>
+                <label className="mb-1.5 block text-xs font-black uppercase tracking-widest text-slate-500">Nom complet</label>
+                <input
+                  name="name"
+                  required
+                  placeholder="Ex: Jean Dupont"
+                  className="w-full rounded-2xl border border-slate-800 bg-[#0f1e23] px-4 py-3 text-white outline-none focus:border-primary"
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-xs font-black uppercase tracking-widest text-slate-500">Email</label>
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="jean@exemple.com"
+                  className="w-full rounded-2xl border border-slate-800 bg-[#0f1e23] px-4 py-3 text-white outline-none focus:border-primary"
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-xs font-black uppercase tracking-widest text-slate-500">Mot de passe</label>
+                <input
+                  name="password"
+                  type="password"
+                  required
+                  placeholder="••••••••"
+                  className="w-full rounded-2xl border border-slate-800 bg-[#0f1e23] px-4 py-3 text-white outline-none focus:border-primary"
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-xs font-black uppercase tracking-widest text-slate-500">Rôle</label>
+                <select
+                  name="role"
+                  defaultValue="user"
+                  className="w-full rounded-2xl border border-slate-800 bg-[#0f1e23] px-4 py-3 text-white outline-none focus:border-primary"
+                >
+                  <option value="user">Élève</option>
+                  <option value="formateur">Formateur</option>
+                </select>
+              </div>
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setAddModalOpen(false)}
+                  className="flex-1 rounded-2xl bg-slate-800 py-3 font-black text-slate-300 hover:bg-slate-700"
+                >
+                  Annuler
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 rounded-2xl bg-primary py-3 font-black text-[#0f1e23] hover:bg-primary/90"
+                >
+                  Créer le compte
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       <section className="rounded-3xl border border-slate-800 bg-[#162a31] overflow-hidden">
         <div className="flex flex-col gap-4 border-b border-slate-800 p-5 md:flex-row md:items-center md:justify-between">

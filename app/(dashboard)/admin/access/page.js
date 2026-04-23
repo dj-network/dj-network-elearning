@@ -1,4 +1,4 @@
-import { asc } from "drizzle-orm";
+import { asc, sql } from "drizzle-orm";
 import db from "@/libs/db";
 import { elearnings, userAccess, users } from "@/libs/schema";
 import AdminAccessTableClient from "./AdminAccessTableClient";
@@ -16,7 +16,7 @@ function buildAccessMap(accessRows) {
 
 export default async function AdminAccessPage() {
   const [allUsers, formations, accessRows] = await Promise.all([
-    db.select().from(users).orderBy(asc(users.email)),
+    db.select().from(users).where(sql`${users.role} != 'admin'`).orderBy(asc(users.email)),
     db
       .select()
       .from(elearnings)

@@ -198,11 +198,17 @@ export default function AdminElearningTableClient({ items }) {
                 >
                   <td className="px-4 py-3">
                     <div className="w-10 h-10 rounded-xl overflow-hidden bg-slate-800">
-                      <img
-                        src={resolveMediaUrl(item.imageUrl) || "/logo.png"}
-                        alt=""
-                        className="w-full h-full object-cover block"
-                      />
+                      {item.imageUrl ? (
+                        <img
+                          src={resolveMediaUrl(item.imageUrl)}
+                          alt=""
+                          className="w-full h-full object-cover block"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500 font-bold uppercase text-center p-1 leading-tight">
+                          image non choisie
+                        </div>
+                      )}
                     </div>
                   </td>
                   <td className="px-2 py-3">

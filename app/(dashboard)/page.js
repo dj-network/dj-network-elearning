@@ -133,10 +133,9 @@ export default async function DashboardPage() {
         {staff ? (
           <Link
             href="/admin/e-learning"
-            className="inline-flex items-center justify-center gap-3 rounded-2xl bg-primary px-6 py-4 text-lg font-black text-[#0f1e23] hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-[#0f1e23] hover:bg-primary/90 transition-colors"
           >
             Gérer le LMS
-            <span className="material-symbols-outlined">arrow_forward</span>
           </Link>
         ) : null}
       </section>

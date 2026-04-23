@@ -122,11 +122,17 @@ export default async function AdminElearningDetailPage({ params }) {
 
       {/* Formation Header */}
       <div className="bg-[#162a31] rounded-2xl border border-slate-800 p-6 mb-8 flex flex-col md:flex-row items-start gap-6">
-        <img
-          src={resolveMediaUrl(mc.imageUrl) || "/logo.png"}
-          alt={mc.title}
-          className="w-32 h-32 rounded-xl object-cover bg-slate-800 shrink-0"
-        />
+        {mc.imageUrl ? (
+          <img
+            src={resolveMediaUrl(mc.imageUrl)}
+            alt={mc.title}
+            className="w-32 h-32 rounded-xl object-cover bg-slate-800 shrink-0"
+          />
+        ) : (
+          <div className="w-32 h-32 rounded-xl bg-slate-800 shrink-0 flex items-center justify-center text-xs text-slate-500 font-bold uppercase text-center p-4">
+            image non choisie
+          </div>
+        )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-4 mb-1">
             <h1 className="text-2xl font-black text-white">{mc.title}</h1>

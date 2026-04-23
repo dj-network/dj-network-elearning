@@ -355,6 +355,7 @@ export async function createCourse(data) {
         .replace(/(^-|-$)/g, ""),
       description: data.description || null,
       sortOrder: nextSortOrder,
+      isRestricted: !!data.isRestricted,
     });
 
     return { success: true };
@@ -377,6 +378,7 @@ export async function updateCourse(id, data) {
     const set = {
       title: data.title,
       description: data.description,
+      isRestricted: !!data.isRestricted,
     };
     if (typeof data.sortOrder === "number" && Number.isFinite(data.sortOrder)) {
       set.sortOrder = data.sortOrder;

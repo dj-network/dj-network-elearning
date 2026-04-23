@@ -106,6 +106,7 @@ export default function AdminFormationEditor({ elearningId, courses }) {
       elearningId,
       title: fd.get("title"),
       description: fd.get("description"),
+      isRestricted: fd.get("isRestricted") === "on",
     });
     if (res.error) alert(res.error);
     setSaving(false);
@@ -120,6 +121,7 @@ export default function AdminFormationEditor({ elearningId, courses }) {
     const res = await updateCourse(editCourse.id, {
       title: fd.get("title"),
       description: fd.get("description"),
+      isRestricted: fd.get("isRestricted") === "on",
     });
     if (res.error) alert(res.error);
     setSaving(false);
@@ -369,6 +371,11 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                 <h3 className="text-white font-bold text-base">
                   {course.title}
                 </h3>
+                {course.isRestricted && (
+                  <span className="bg-amber-500/10 text-amber-500 text-[10px] px-2 py-0.5 rounded-md font-bold ml-2 uppercase tracking-tighter">
+                    Restreint
+                  </span>
+                )}
                 {course.description && (
                   <p className="text-slate-500 text-xs line-clamp-1">
                     {course.description}
@@ -557,6 +564,17 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                 label="Description"
                 placeholder="Décrivez le contenu de ce module..."
               />
+              <div className="flex items-center gap-3 bg-[#0f1e23] p-4 rounded-xl border border-slate-700/50">
+                <input
+                  type="checkbox"
+                  name="isRestricted"
+                  id="isRestricted"
+                  className="w-5 h-5 rounded-lg border-slate-700 bg-slate-800 text-primary focus:ring-primary/20"
+                />
+                <label htmlFor="isRestricted" className="text-sm font-bold text-white cursor-pointer">
+                  Module restreint (avancé)
+                </label>
+              </div>
               <ModalActions
                 onCancel={() => setAddCourseOpen(false)}
                 saving={saving}
@@ -589,6 +607,18 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                 label="Description"
                 defaultValue={editCourse.description ?? ""}
               />
+              <div className="flex items-center gap-3 bg-[#0f1e23] p-4 rounded-xl border border-slate-700/50">
+                <input
+                  type="checkbox"
+                  name="isRestricted"
+                  id="isRestrictedEdit"
+                  defaultChecked={!!editCourse.isRestricted}
+                  className="w-5 h-5 rounded-lg border-slate-700 bg-slate-800 text-primary focus:ring-primary/20"
+                />
+                <label htmlFor="isRestrictedEdit" className="text-sm font-bold text-white cursor-pointer">
+                  Module restreint (avancé)
+                </label>
+              </div>
               <ModalActions
                 onCancel={() => setEditCourse(null)}
                 saving={saving}
