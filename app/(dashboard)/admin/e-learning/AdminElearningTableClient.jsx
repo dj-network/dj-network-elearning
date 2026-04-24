@@ -240,7 +240,7 @@ export default function AdminElearningTableClient({ items }) {
                 <th className="px-4 py-3 w-12"></th>
                 <th className="px-2 py-3 w-12"></th>
                 <th
-                  className="px-4 py-3 cursor-pointer select-none"
+                  className="px-4 py-3 cursor-pointer select-none min-w-[260px]"
                   onClick={() => handleSort("title")}
                 >
                   <span className="flex items-center gap-1 text-slate-400 font-bold text-xs uppercase tracking-wider">
@@ -255,7 +255,7 @@ export default function AdminElearningTableClient({ items }) {
                     Catégorie {renderSortIcon("category")}
                   </span>
                 </th>
-                <th className="px-4 py-3 hidden lg:table-cell">
+                <th className="px-4 py-3 hidden lg:table-cell min-w-[180px]">
                   <span className="text-slate-400 font-bold text-xs uppercase tracking-wider">
                     Contenu
                   </span>
@@ -331,12 +331,14 @@ export default function AdminElearningTableClient({ items }) {
                       </span>
                     </span>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 min-w-[260px]">
                     <p className="text-white font-bold text-sm leading-tight line-clamp-1">
                       {item.title}
                     </p>
                     <p className="text-slate-500 text-xs">
-                      #{idx + 1} • {item.duration || "—"} • {item.level || "Tous niveaux"} • {item.instructor || "—"}
+                      {[item.duration, item.level || "Tous niveaux", item.instructor || "—"]
+                        .filter(Boolean)
+                        .join(" • ")}
                     </p>
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell">
@@ -344,8 +346,8 @@ export default function AdminElearningTableClient({ items }) {
                       {item.category || "Formation"}
                     </span>
                   </td>
-                  <td className="px-4 py-3 hidden lg:table-cell">
-                    <span className="text-slate-500 text-xs">
+                  <td className="px-4 py-3 hidden lg:table-cell min-w-[180px]">
+                    <span className="whitespace-nowrap text-xs text-slate-500">
                       {item.courseCount || 0} module(s) • {item.lessonCount || 0} leçon(s)
                     </span>
                   </td>
