@@ -146,7 +146,7 @@ export default function SettingsClient({
   }
 
   return (
-    <div className="bg-[#101f25] border border-slate-700/40 rounded-3xl p-6 lg:p-8">
+    <div className="rounded-2xl border border-slate-700/40 bg-[#101f25] p-4 sm:rounded-3xl sm:p-6 lg:p-8">
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
         <div ref={photoMenuRef} className="shrink-0 relative">
           <div className="w-20 h-20 rounded-full bg-slate-800 border border-slate-700/60 overflow-hidden flex items-center justify-center">
@@ -170,7 +170,7 @@ export default function SettingsClient({
           </button>
 
           {photoMenuOpen ? (
-            <div className="absolute left-[calc(100%+12px)] top-1/2 z-20 min-w-52 -translate-y-1/2 rounded-2xl border border-slate-700/60 bg-[#162a31]/95 backdrop-blur-xl shadow-2xl overflow-hidden">
+            <div className="absolute left-1/2 top-[calc(100%+12px)] z-20 min-w-52 -translate-x-1/2 rounded-2xl border border-slate-700/60 bg-[#162a31]/95 shadow-2xl backdrop-blur-xl sm:left-[calc(100%+12px)] sm:top-1/2 sm:-translate-x-0 sm:-translate-y-1/2 overflow-hidden">
               <button
                 type="button"
                 onClick={() => {
@@ -205,7 +205,7 @@ export default function SettingsClient({
           <div className="text-center sm:text-left">
             <h2 className="text-xl font-extrabold text-slate-100">{title}</h2>
             <div className="mt-1 flex flex-col sm:flex-row sm:items-center gap-2">
-              <p className="text-slate-400 text-sm">{user?.email}</p>
+              <p className="break-all text-sm text-slate-400">{user?.email}</p>
               <span
                 className={`inline-flex items-center justify-center rounded-full px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest ${accountBadge.classes}`}
               >
@@ -242,7 +242,7 @@ export default function SettingsClient({
           </div>
 
           <div className="mt-6">
-            <p className="text-slate-500 text-sm text-center sm:text-left">
+            <p className="text-center text-sm text-slate-500 sm:text-left">
               Cliquez sur le crayon pour ajouter, modifier ou supprimer votre photo de profil.
             </p>
             <input
@@ -291,7 +291,7 @@ export default function SettingsClient({
           <h4 className="text-2xl font-extrabold text-white mt-1">
             {isStaff ? accountBadge.label : "Élève"}
           </h4>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="mt-1 text-sm text-slate-400">
             {isStaff
               ? "Accès administrateur aux contenus et aux pages de gestion."
               : "Votre accès aux formations est géré par l'équipe DJ Network."}

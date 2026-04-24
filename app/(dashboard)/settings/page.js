@@ -39,11 +39,13 @@ export default async function SettingsPage() {
   }
 
   return (
-    <div className="p-6 lg:p-10">
+    <div className="px-4 py-6 sm:px-6 lg:p-10">
       <div className="max-w-4xl">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold text-slate-100">Paramètres</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-100">
+              Paramètres
+            </h1>
             <p className="text-slate-400 mt-1">
               Gérez votre profil et vos informations de compte.
             </p>

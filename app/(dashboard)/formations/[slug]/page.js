@@ -129,7 +129,7 @@ export default async function FormationPlayerPage({ params, searchParams }) {
           </span>
         </nav>
 
-        <div className="relative w-full aspect-video rounded-xl bg-slate-950 shadow-2xl border border-slate-800 mb-8">
+        <div className="relative mb-6 aspect-video w-full rounded-xl border border-slate-800 bg-slate-950 shadow-2xl sm:mb-8">
           {currentLesson?.videoUrl ? (
             <VideoPlayer videoUrl={currentLesson.videoUrl} chapters={chapters} />
           ) : (
@@ -150,11 +150,11 @@ export default async function FormationPlayerPage({ params, searchParams }) {
               <h1 className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-white">
                 Leçon {currentIndex + 1} : {currentLesson.title}
               </h1>
-              <div className="flex gap-3">
+              <div className="grid grid-cols-2 gap-3 sm:flex">
                 {prevLesson ? (
                   <Link
                     href={`/formations/${formation.slug}?lessonId=${prevLesson.id}`}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#162a31] text-slate-300 hover:bg-slate-700 transition-colors font-medium text-sm border border-slate-700"
+                    className="flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-[#162a31] px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-slate-700 sm:px-4"
                   >
                     <span className="material-symbols-outlined text-lg">
                       chevron_left
@@ -164,7 +164,7 @@ export default async function FormationPlayerPage({ params, searchParams }) {
                 ) : (
                   <button
                     disabled
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#162a31]/50 text-slate-600 font-medium text-sm border border-slate-800 cursor-not-allowed"
+                    className="flex cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-slate-800 bg-[#162a31]/50 px-3 py-2 text-sm font-medium text-slate-600 sm:px-4"
                   >
                     <span className="material-symbols-outlined text-lg">
                       chevron_left
@@ -176,7 +176,7 @@ export default async function FormationPlayerPage({ params, searchParams }) {
                 {nextLesson ? (
                   <Link
                     href={`/formations/${formation.slug}?lessonId=${nextLesson.id}`}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-[#0f1e23] hover:bg-primary/90 transition-opacity font-bold text-sm"
+                    className="flex items-center justify-center gap-2 rounded-lg bg-primary px-3 py-2 text-sm font-bold text-[#0f1e23] transition-opacity hover:bg-primary/90 sm:px-4"
                   >
                     Suivant
                     <span className="material-symbols-outlined text-lg">
@@ -186,7 +186,7 @@ export default async function FormationPlayerPage({ params, searchParams }) {
                 ) : (
                   <button
                     disabled
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/20 text-primary/30 font-bold text-sm cursor-not-allowed"
+                    className="flex cursor-not-allowed items-center justify-center gap-2 rounded-lg bg-primary/20 px-3 py-2 text-sm font-bold text-primary/30 sm:px-4"
                   >
                     Suivant
                     <span className="material-symbols-outlined text-lg">
@@ -251,7 +251,7 @@ export default async function FormationPlayerPage({ params, searchParams }) {
         )}
       </div>
 
-      <aside className="w-full lg:w-[400px] border-l border-slate-800 bg-[#0f1e23] flex flex-col shrink-0">
+      <aside className="w-full shrink-0 border-t border-slate-800 bg-[#0f1e23] lg:w-[400px] lg:border-l lg:border-t-0 flex flex-col">
         <div className="p-6 border-b border-slate-800">
           <h2 className="text-lg font-bold text-white mb-2">
             Programme du cours
@@ -272,7 +272,7 @@ export default async function FormationPlayerPage({ params, searchParams }) {
           </p>
         </div>
 
-        <div className="flex-1 p-4 space-y-4">
+        <div className="flex-1 space-y-4 p-4">
           {sortedModules.length === 0 ? (
             <p className="text-sm text-slate-500 text-center py-4">
               Aucun module disponible.
@@ -303,9 +303,9 @@ export default async function FormationPlayerPage({ params, searchParams }) {
                         >
                           play_circle
                         </span>
-                        <div className="flex-1">
+                        <div className="min-w-0 flex-1">
                           <p
-                            className={`text-sm font-medium ${isCurrent ? "text-primary font-bold" : "text-slate-300"}`}
+                            className={`truncate text-sm font-medium ${isCurrent ? "text-primary font-bold" : "text-slate-300"}`}
                           >
                             Leçon {lessonNumber} : {lesson.title}
                           </p>

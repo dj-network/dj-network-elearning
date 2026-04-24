@@ -276,25 +276,25 @@ export default function AdminFormationEditor({ elearningId, courses }) {
 
   return (
     <>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="flex items-center gap-2 text-2xl font-bold leading-tight text-white sm:text-xl">
           <span className="material-symbols-outlined text-primary">
             view_list
           </span>
           Programme de la formation
         </h2>
-        <div className="flex gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:flex sm:items-center">
           <button
             onClick={handleDeleteElearning}
             disabled={saving}
-            className="text-sm font-bold bg-red-500/10 text-red-500 px-4 py-2 rounded-xl hover:bg-red-500/20 transition-all flex items-center gap-2"
+            className="flex min-h-11 items-center justify-center gap-2 rounded-xl bg-red-500/10 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500/20 disabled:opacity-50"
           >
             <span className="material-symbols-outlined text-lg">delete</span>
             Supprimer la formation
           </button>
           <button
             onClick={() => setAddCourseOpen(true)}
-            className="text-sm font-bold bg-primary text-[#0f1e23] px-4 py-2 rounded-xl hover:shadow-[0_0_20px_rgba(6,188,249,0.3)] transition-all flex items-center gap-2"
+            className="flex min-h-11 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-black text-[#0f1e23] transition-all hover:shadow-[0_0_20px_rgba(6,188,249,0.3)]"
           >
             <span className="material-symbols-outlined text-lg">add</span>
             Nouveau module
@@ -303,7 +303,7 @@ export default function AdminFormationEditor({ elearningId, courses }) {
       </div>
 
       {courses.length === 0 && (
-        <div className="text-center py-16 bg-[#162a31] rounded-2xl border border-slate-800">
+        <div className="rounded-2xl border border-slate-800 bg-[#162a31] px-5 py-14 text-center sm:py-16">
           <span className="material-symbols-outlined text-5xl text-slate-600 mb-3 block">
             folder_open
           </span>
@@ -313,7 +313,7 @@ export default function AdminFormationEditor({ elearningId, courses }) {
           </p>
           <button
             onClick={() => setAddCourseOpen(true)}
-            className="text-sm font-bold bg-primary text-[#0f1e23] px-5 py-2.5 rounded-xl hover:shadow-[0_0_20px_rgba(6,188,249,0.3)] transition-all"
+            className="rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-[#0f1e23] transition-all hover:shadow-[0_0_20px_rgba(6,188,249,0.3)]"
           >
             Créer un module
           </button>
@@ -340,7 +340,7 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                 e.preventDefault();
                 handleDropCourse(course.id);
               }}
-              className={`flex items-center gap-4 p-5 border-b border-slate-800 ${
+              className={`flex flex-wrap items-center gap-3 border-b border-slate-800 p-4 sm:flex-nowrap sm:gap-4 sm:p-5 ${
                 dragOverCourseId === course.id
                   ? "bg-primary/10"
                   : ""
@@ -364,11 +364,11 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                   drag_indicator
                 </span>
               </span>
-              <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-black text-lg shrink-0">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-lg font-black text-primary">
                 {courseIdx + 1}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-white font-bold text-base">
+                <h3 className="truncate text-base font-bold text-white">
                   {course.title}
                 </h3>
                 {course.isRestricted && (
@@ -382,10 +382,10 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                   </p>
                 )}
               </div>
-              <span className="text-slate-500 text-xs font-bold">
+              <span className="shrink-0 text-xs font-bold text-slate-500">
                 {course.lessons.length} leçon(s)
               </span>
-              <div className="flex gap-1.5">
+              <div className="ml-auto flex gap-1.5 sm:ml-0">
                 <button
                   onClick={() => setEditCourse(course)}
                   className="text-xs font-medium bg-slate-800 text-slate-300 px-2.5 py-1.5 rounded-lg hover:bg-slate-700 transition-colors flex items-center gap-1"
@@ -426,7 +426,7 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                       e.preventDefault();
                       handleDropLesson(course.id, lesson.id);
                     }}
-                    className={`flex items-center gap-4 py-3 px-4 rounded-xl transition-colors group ${
+                    className={`group flex flex-wrap items-center gap-3 rounded-xl px-3 py-3 transition-colors sm:flex-nowrap sm:gap-4 sm:px-4 ${
                       dragOver === lesson.id
                         ? "bg-primary/10 border border-primary/20"
                         : "hover:bg-[#0f1e23]/70"
@@ -459,10 +459,10 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                       <img
                         src={`https://img.youtube.com/vi/${ytId}/mqdefault.jpg`}
                         alt=""
-                        className="w-24 h-14 rounded-lg object-cover bg-slate-800 shrink-0"
+                        className="h-14 w-24 shrink-0 rounded-lg bg-slate-800 object-cover"
                       />
                     ) : (
-                      <div className="w-24 h-14 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
+                      <div className="flex h-14 w-24 shrink-0 items-center justify-center rounded-lg bg-slate-800">
                         <span className="material-symbols-outlined text-slate-600 text-xl">
                           videocam_off
                         </span>
@@ -471,7 +471,7 @@ export default function AdminFormationEditor({ elearningId, courses }) {
 
                     {/* Lesson Info */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-white text-sm font-bold line-clamp-1">
+                        <p className="line-clamp-1 text-sm font-bold text-white">
                         {lesson.title}
                       </p>
                       {lesson.description && (
@@ -479,7 +479,7 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                           {lesson.description}
                         </p>
                       )}
-                      <div className="flex items-center gap-3 mt-1">
+                      <div className="mt-1 flex flex-wrap items-center gap-2 sm:gap-3">
                         {lesson.videoUrl ? (
                           <span className="text-green-400 text-[10px] font-bold flex items-center gap-0.5">
                             <span className="material-symbols-outlined text-xs">
@@ -504,10 +504,10 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex w-full gap-2 opacity-100 transition-opacity sm:w-auto sm:opacity-0 sm:group-hover:opacity-100">
                       <button
                         onClick={() => setEditLesson(lesson)}
-                        className="text-xs font-medium bg-slate-800 text-slate-300 px-2.5 py-1.5 rounded-lg hover:bg-slate-700 transition-colors flex items-center gap-1"
+                        className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-slate-800 px-2.5 py-2 text-xs font-medium text-slate-300 transition-colors hover:bg-slate-700 sm:flex-none sm:py-1.5"
                       >
                         <span className="material-symbols-outlined text-sm">
                           edit
@@ -516,7 +516,7 @@ export default function AdminFormationEditor({ elearningId, courses }) {
                       </button>
                       <button
                         onClick={() => handleDeleteLesson(lesson.id)}
-                        className="text-xs font-medium bg-red-500/10 text-red-400 px-2.5 py-1.5 rounded-lg hover:bg-red-500/20 transition-colors"
+                        className="flex items-center justify-center rounded-lg bg-red-500/10 px-3 py-2 text-xs font-medium text-red-400 transition-colors hover:bg-red-500/20 sm:py-1.5"
                       >
                         <span className="material-symbols-outlined text-sm">
                           delete

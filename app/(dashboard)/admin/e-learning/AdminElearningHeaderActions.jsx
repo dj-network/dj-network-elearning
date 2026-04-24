@@ -47,15 +47,15 @@ export default function AdminElearningHeaderActions() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-primary text-[#0f1e23] px-4 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 font-black text-[#0f1e23] shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90 sm:w-auto sm:py-2.5"
       >
-        <span className="material-symbols-outlined">add</span>
-        Nouvelle formation
+        <span className="material-symbols-outlined text-xl">add</span>
+        <span>Nouvelle formation</span>
       </button>
 
       {isOpen ? (
         <div className="fixed inset-0 z-[120] flex items-center justify-center bg-[#0f1e23]/90 p-4 backdrop-blur-md">
-          <div className="w-full max-w-2xl rounded-3xl border border-slate-700/60 bg-[#162a31] p-6 shadow-2xl">
+          <div className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-slate-700/60 bg-[#162a31] p-5 shadow-2xl sm:rounded-3xl sm:p-6">
             <div className="mb-6 flex items-center justify-between gap-4">
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.24em] text-primary">
@@ -149,7 +149,7 @@ export default function AdminElearningHeaderActions() {
                 Publiée en ligne
               </label>
 
-              <div className="flex justify-end gap-3 pt-4">
+              <div className="flex flex-col-reverse gap-3 pt-4 sm:flex-row sm:justify-end">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}

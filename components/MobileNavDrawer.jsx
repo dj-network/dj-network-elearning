@@ -4,11 +4,10 @@ export default function MobileNavDrawer() {
   return (
     <label
       htmlFor="mobile-drawer"
-      className="lg:hidden w-10 h-10 rounded-xl bg-slate-800/50 hover:bg-slate-800 text-slate-200 border border-slate-700/60 flex items-center justify-center transition-colors cursor-pointer"
+      className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-xl border border-slate-700/60 bg-slate-800/50 text-slate-200 transition-colors hover:bg-slate-800 lg:hidden"
       aria-label="Ouvrir le menu"
     >
       <span className="material-symbols-outlined">menu</span>
     </label>
   );
 }
-

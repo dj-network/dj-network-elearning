@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 export default async function DashboardLayout({ children }) {
   const session = await auth();
   const role = session?.user?.role || "user";
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="drawer lg:drawer-open h-screen overflow-hidden bg-bg-dark">
@@ -14,7 +15,12 @@ export default async function DashboardLayout({ children }) {
         <HeaderBar session={session} />
 
         <main className="flex-1 overflow-y-auto">
-          <div className="min-h-full flex flex-col">{children}</div>
+          <div className="min-h-full flex flex-col">
+            <div className="flex-1">{children}</div>
+            <footer className="global-footer-wrapper border-t border-slate-800/70 px-4 py-5 text-center text-xs font-bold uppercase tracking-widest text-slate-500 sm:px-6">
+              © {currentYear} DJ Network Formation
+            </footer>
+          </div>
         </main>
       </div>
 

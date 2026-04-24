@@ -7,7 +7,7 @@ export default function HeaderBar({ session }) {
   const role = session?.user?.role || "user";
 
   return (
-    <header className="h-[72px] sticky top-0 z-30 flex items-center justify-between px-8 lg:px-10 py-2 bg-[#0f1e23]/95 backdrop-blur-xl shrink-0 border-b border-transparent">
+    <header className="sticky top-0 z-30 flex h-[64px] shrink-0 items-center justify-between border-b border-transparent bg-[#0f1e23]/95 px-4 py-2 backdrop-blur-xl sm:h-[72px] sm:px-6 lg:px-10">
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <MobileNavDrawer role={role} />
 

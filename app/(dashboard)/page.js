@@ -115,7 +115,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 text-white">
-      <section className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <section className="mb-10">
         <div className="max-w-3xl">
           <p className="text-primary text-sm font-black uppercase tracking-[0.24em] mb-3">
             DJ Network LMS
@@ -129,15 +129,6 @@ export default async function DashboardPage() {
             chaque formation.
           </p>
         </div>
-
-        {staff ? (
-          <Link
-            href="/admin/e-learning"
-            className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-[#0f1e23] hover:bg-primary/90 transition-colors"
-          >
-            Gérer le LMS
-          </Link>
-        ) : null}
       </section>
 
       {items.length > 0 ? (

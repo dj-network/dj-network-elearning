@@ -53,18 +53,18 @@ export default async function AdminElearningPage() {
     .join("|");
 
   return (
-    <div className="p-8 max-w-7xl mx-auto w-full text-white">
-      <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="w-full max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 lg:py-8 text-white">
+      <div className="mb-6 sm:mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <span className="material-symbols-outlined text-secondary text-3xl">
+            <span className="material-symbols-outlined text-secondary text-2xl sm:text-3xl">
               school
             </span>
-            <h1 className="text-3xl font-black text-white">
+            <h1 className="text-3xl sm:text-4xl font-black text-white">
               Gestion E-learning
             </h1>
           </div>
-          <p className="text-slate-400">
+          <p className="max-w-2xl text-slate-400">
             Cliquez sur une formation pour gérer ses modules, leçons et vidéos
             LMS.
           </p>

@@ -106,39 +106,41 @@ export default async function AdminElearningDetailPage({ params }) {
     .join("|");
 
   return (
-    <div className="p-8 max-w-7xl mx-auto w-full">
+    <div className="w-full max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm mb-6">
+      <div className="mb-6 flex min-w-0 items-center gap-2 text-sm">
         <Link
           href="/admin/e-learning"
-          className="text-slate-500 hover:text-primary transition-colors flex items-center gap-1"
+          className="flex shrink-0 items-center gap-1 text-slate-500 transition-colors hover:text-primary"
         >
           <span className="material-symbols-outlined text-sm">arrow_back</span>
           E-learning
         </Link>
-        <span className="text-slate-600">/</span>
-        <span className="text-white font-bold">{mc.title}</span>
+        <span className="text-slate-600 shrink-0">/</span>
+        <span className="min-w-0 truncate font-bold text-white">{mc.title}</span>
       </div>
 
       {/* Formation Header */}
-      <div className="bg-[#162a31] rounded-2xl border border-slate-800 p-6 mb-8 flex flex-col md:flex-row items-start gap-6">
+      <div className="mb-8 flex flex-col gap-5 rounded-2xl border border-slate-800 bg-[#162a31] p-4 sm:p-6 md:flex-row md:items-start md:gap-6">
         {mc.imageUrl ? (
           <img
             src={resolveMediaUrl(mc.imageUrl)}
             alt={mc.title}
-            className="w-32 h-32 rounded-xl object-cover bg-slate-800 shrink-0"
+            className="h-28 w-28 rounded-xl object-cover bg-slate-800 shrink-0 sm:h-32 sm:w-32"
           />
         ) : (
-          <div className="w-32 h-32 rounded-xl bg-slate-800 shrink-0 flex items-center justify-center text-xs text-slate-500 font-bold uppercase text-center p-4">
+          <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-xl bg-slate-800 p-4 text-center text-xs font-bold uppercase text-slate-500 sm:h-32 sm:w-32">
             image non choisie
           </div>
         )}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between gap-4 mb-1">
-            <h1 className="text-2xl font-black text-white">{mc.title}</h1>
+          <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <h1 className="text-3xl font-black leading-tight text-white sm:text-2xl">
+              {mc.title}
+            </h1>
             <AdminElearningMetadataEditor mc={mc} />
           </div>
-          <p className="text-slate-400 text-sm mb-3">
+          <p className="mb-3 text-sm leading-relaxed text-slate-400">
             Par <span className="text-white">{mc.instructor}</span> •{" "}
             {mc.duration || "—"} • {mc.level || "Tous niveaux"} •{" "}
             {mc.category || "—"}
@@ -146,17 +148,17 @@ export default async function AdminElearningDetailPage({ params }) {
           <p className="text-slate-500 text-sm line-clamp-2">
             {mc.description}
           </p>
-          <div className="flex gap-3 mt-4 text-xs">
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded-lg font-bold">
+          <div className="mt-4 grid grid-cols-2 gap-3 text-xs sm:flex sm:flex-wrap">
+            <span className="rounded-lg bg-primary/10 px-3 py-2 font-bold text-primary">
               {sortedCourses.length} module(s)
             </span>
-            <span className="bg-purple-500/10 text-purple-400 px-3 py-1 rounded-lg font-bold">
+            <span className="rounded-lg bg-purple-500/10 px-3 py-2 font-bold text-purple-400">
               {allLessons.length} leçon(s)
             </span>
             <Link
               href={`/formations/${mc.slug}`}
               target="_blank"
-              className="bg-slate-800 text-slate-300 px-3 py-1 rounded-lg font-bold hover:bg-slate-700 transition-colors flex items-center gap-1"
+              className="col-span-2 flex items-center justify-center gap-1 rounded-lg bg-slate-800 px-3 py-2 font-bold text-slate-300 transition-colors hover:bg-slate-700 sm:col-span-1"
             >
               <span className="material-symbols-outlined text-xs">
                 visibility

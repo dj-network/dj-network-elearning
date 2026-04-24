@@ -94,17 +94,18 @@ export default function AdminElearningMetadataEditor({ mc }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="text-xs font-bold bg-[#162a31] text-slate-400 px-3 py-1.5 rounded-lg border border-slate-700/50 hover:bg-slate-700 hover:text-white transition-all flex items-center gap-1.5"
+        className="inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-slate-700/50 bg-[#162a31] px-3 text-xs font-bold text-slate-400 transition-all hover:bg-slate-700 hover:text-white md:h-auto md:flex-none md:rounded-lg md:py-1.5"
       >
         <span className="material-symbols-outlined text-sm">settings</span>
-        Modifier les infos
+        <span className="md:hidden">Infos</span>
+        <span className="hidden md:inline">Modifier les infos</span>
       </button>
 
       {isOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[#0f1e23]/90 backdrop-blur-md p-4">
-          <div className="bg-[#162a31] border border-slate-700/50 rounded-3xl p-8 w-full max-w-2xl shadow-2xl overflow-y-auto max-h-[90vh]">
+          <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-slate-700/50 bg-[#162a31] p-5 shadow-2xl sm:rounded-3xl sm:p-8">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-white flex items-center gap-3">
+              <h2 className="flex items-center gap-3 text-xl font-bold text-white sm:text-2xl">
                 <span className="material-symbols-outlined text-primary">
                   edit_note
                 </span>
@@ -121,8 +122,8 @@ export default function AdminElearningMetadataEditor({ mc }) {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-2 gap-5">
-                <div className="col-span-2 sm:col-span-1">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div>
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
                     Titre de la formation
                   </label>
@@ -133,7 +134,7 @@ export default function AdminElearningMetadataEditor({ mc }) {
                     className="w-full bg-[#0f1e23] border border-slate-700/50 rounded-xl px-4 py-2.5 text-white outline-none focus:border-primary transition-colors"
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div>
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
                     Slug (URL)
                   </label>
@@ -190,11 +191,11 @@ export default function AdminElearningMetadataEditor({ mc }) {
                     <option value="Expert">Expert</option>
                   </select>
                 </div>
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
                     Image de couverture
                   </label>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                     {mc.imageUrl && (
                       <img
                         src={resolveMediaUrl(mc.imageUrl)}
@@ -206,12 +207,12 @@ export default function AdminElearningMetadataEditor({ mc }) {
                       name="coverImage"
                       type="file"
                       accept="image/*"
-                      className="flex-1 bg-[#0f1e23] border border-slate-700/50 rounded-xl px-4 py-2 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-primary file:text-[#0f1e23] hover:file:bg-primary/80 outline-none"
+                      className="w-full flex-1 rounded-xl border border-slate-700/50 bg-[#0f1e23] px-4 py-2 text-white outline-none file:mr-4 file:rounded-lg file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-bold file:text-[#0f1e23] hover:file:bg-primary/80"
                     />
                   </div>
                 </div>
 
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
                     Description
                   </label>
@@ -223,7 +224,7 @@ export default function AdminElearningMetadataEditor({ mc }) {
                   />
                 </div>
 
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
                     Tags (filtres)
                   </label>
@@ -239,8 +240,8 @@ export default function AdminElearningMetadataEditor({ mc }) {
                   </p>
                 </div>
 
-                <div className="col-span-2">
-                  <label className="inline-flex items-center gap-3 bg-[#0f1e23] border border-slate-700/50 rounded-xl px-4 py-3 text-white">
+                <div className="sm:col-span-2">
+                  <label className="inline-flex w-full flex-wrap items-center gap-3 rounded-xl border border-slate-700/50 bg-[#0f1e23] px-4 py-3 text-white sm:w-auto">
                     <input
                       type="checkbox"
                       name="isPublished"
@@ -255,7 +256,7 @@ export default function AdminElearningMetadataEditor({ mc }) {
                 </div>
               </div>
 
-              <div className="pt-4 flex items-center justify-end gap-3 border-t border-slate-800">
+              <div className="flex flex-col-reverse gap-3 border-t border-slate-800 pt-4 sm:flex-row sm:items-center sm:justify-end">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}

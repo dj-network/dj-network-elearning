@@ -210,15 +210,15 @@ export default function AdminAccessTableClient({ users, formations }) {
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center lg:w-auto">
           <button
             onClick={() => setAddModalOpen(true)}
-            className="rounded-2xl bg-primary px-6 py-3 font-black text-[#0f1e23] hover:bg-primary/90 transition-all flex items-center gap-2"
+            className="flex items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3 font-black text-[#0f1e23] transition-all hover:bg-primary/90"
           >
             <span className="material-symbols-outlined">person_add</span>
             Ajouter un élève
           </button>
-          <div className="rounded-2xl border border-slate-800 bg-[#162a31] px-5 py-2">
+          <div className="rounded-2xl border border-slate-800 bg-[#162a31] px-5 py-2 sm:min-w-28">
             <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 leading-tight">
               Comptes
             </p>
@@ -300,7 +300,7 @@ export default function AdminAccessTableClient({ users, formations }) {
         </div>
       )}
 
-      <section className="rounded-3xl border border-slate-800 bg-[#162a31] overflow-hidden">
+      <section className="overflow-hidden rounded-2xl border border-slate-800 bg-[#162a31] sm:rounded-3xl">
         <div className="flex flex-col gap-4 border-b border-slate-800 p-5 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-2xl font-black">Liste des élèves</h2>
@@ -322,7 +322,46 @@ export default function AdminAccessTableClient({ users, formations }) {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="space-y-3 p-4 md:hidden">
+          {filteredUsers.map((user) => (
+            <article
+              key={user.id}
+              className="rounded-2xl border border-slate-800 bg-[#0f1e23] p-4"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate font-black text-white">
+                    {user.name || "Sans nom"}
+                  </p>
+                  <p className="mt-1 truncate text-sm text-slate-400">
+                    {user.email}
+                  </p>
+                </div>
+                <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-black uppercase ${roleClass(user.role)}`}>
+                  {roleLabel(user.role)}
+                </span>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <p className="text-sm text-slate-500">
+                  <span className="font-black text-primary">
+                    {user.formationIds.length}
+                  </span>{" "}
+                  formation{user.formationIds.length > 1 ? "s" : ""}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setSelectedUserId(user.id)}
+                  className="rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-black text-primary hover:bg-primary/20"
+                >
+                  Détails
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="hidden overflow-x-auto md:block">
           <table className="w-full min-w-[760px] text-left">
             <thead className="bg-[#0f1e23] text-xs font-black uppercase tracking-widest text-slate-500">
               <tr>

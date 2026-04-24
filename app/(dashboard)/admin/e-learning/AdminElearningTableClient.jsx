@@ -118,8 +118,8 @@ export default function AdminElearningTableClient({ items }) {
 
   return (
     <>
-      <div className="flex flex-wrap items-center gap-3 mb-6">
-        <div className="relative flex-1 min-w-[200px] max-w-sm">
+      <div className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:flex-wrap sm:items-center">
+        <div className="relative w-full sm:max-w-sm sm:flex-1">
           <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-lg">
             search
           </span>
@@ -131,19 +131,110 @@ export default function AdminElearningTableClient({ items }) {
           />
         </div>
 
-        <span className="text-slate-500 text-xs ml-auto">
-          {filteredItems.length} formation(s)
-        </span>
-        <span className="text-slate-500 text-xs">
-          {canReorder
-            ? "Glisse les lignes pour changer l'ordre"
-            : "Réordonner disponible seulement en vue par défaut"}
-        </span>
+        <div className="flex flex-col gap-1 text-xs text-slate-500 sm:ml-auto sm:items-end">
+          <span>{filteredItems.length} formation(s)</span>
+          <span className="hidden sm:inline">
+            {canReorder
+              ? "Glisse les lignes pour changer l'ordre"
+              : "Réordonner disponible seulement en vue par défaut"}
+          </span>
+        </div>
       </div>
 
-      <div className="bg-[#162a31] rounded-2xl border border-slate-800 overflow-hidden">
+      <div className="space-y-3 md:hidden">
+        {filteredItems.map((item, idx) => (
+          <article
+            key={item.id}
+            className="rounded-2xl border border-slate-800 bg-[#162a31] p-4"
+          >
+            <div className="flex gap-3">
+              <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-slate-800">
+                {item.imageUrl ? (
+                  <img
+                    src={resolveMediaUrl(item.imageUrl)}
+                    alt=""
+                    className="block h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center p-1 text-center text-[8px] font-bold uppercase leading-tight text-slate-500">
+                    image non choisie
+                  </div>
+                )}
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <div className="mb-1 flex items-start justify-between gap-2">
+                  <p className="min-w-0 truncate text-base font-black leading-tight text-white">
+                    {item.title}
+                  </p>
+                  {!item.isPublished ? (
+                    <span className="shrink-0 rounded-lg bg-amber-400/15 px-2 py-1 text-[10px] font-black uppercase text-amber-200">
+                      Brouillon
+                    </span>
+                  ) : null}
+                </div>
+                <p className="text-xs leading-relaxed text-slate-500">
+                  #{idx + 1} · {item.duration || "—"} · {item.level || "Tous niveaux"}
+                </p>
+                <p className="truncate text-xs text-slate-500">
+                  {item.instructor || "—"}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-400">
+              <div className="rounded-xl bg-[#0f1e23] px-3 py-2">
+                <p className="text-slate-500">Modules</p>
+                <p className="font-black text-white">{item.courseCount || 0}</p>
+              </div>
+              <div className="rounded-xl bg-[#0f1e23] px-3 py-2">
+                <p className="text-slate-500">Leçons</p>
+                <p className="font-black text-white">{item.lessonCount || 0}</p>
+              </div>
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <Link
+                href={`/formations/${item.slug}`}
+                target="_blank"
+                className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-slate-800 px-3 text-sm font-bold text-slate-300 transition-colors hover:bg-slate-700"
+                title="Visualiser"
+              >
+                <span className="material-symbols-outlined text-lg">
+                  visibility
+                </span>
+                Voir
+              </Link>
+              <Link
+                href={`/admin/e-learning/${item.id}`}
+                className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-3 text-sm font-black text-[#0f1e23] transition-colors hover:bg-primary/90"
+                title="Gérer"
+              >
+                <span className="material-symbols-outlined text-lg">tune</span>
+                Gérer
+              </Link>
+              <AdminElearningMetadataEditor mc={item} />
+              <button
+                onClick={() => setDeleteConfirm(item)}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/10 text-red-400 transition-colors hover:bg-red-500/20"
+                title="Supprimer"
+                aria-label={`Supprimer ${item.title}`}
+              >
+                <span className="material-symbols-outlined text-lg">delete</span>
+              </button>
+            </div>
+          </article>
+        ))}
+        {filteredItems.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-slate-800 bg-[#162a31] p-8 text-center text-slate-500">
+            Aucune formation trouvée.
+          </div>
+        ) : null}
+      </div>
+
+      <div className="hidden overflow-hidden rounded-2xl border border-slate-800 bg-[#162a31] md:block">
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[760px] text-sm">
             <thead>
               <tr className="border-b border-slate-800 text-left">
                 <th className="px-4 py-3 w-12"></th>
